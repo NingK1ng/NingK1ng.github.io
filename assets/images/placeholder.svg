@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" role="img" aria-labelledby="title desc">
+  <title id="title">Media placeholder</title>
+  <desc id="desc">A neutral placeholder for media that has not been supplied.</desc>
+  <rect width="16" height="10" fill="#f1f1f1"/>
+  <path d="M1.6 8.7 5.4 5l2.1 2 2.2-2.5 4.7 4.2" fill="none" stroke="#d4d4d4" stroke-width=".35"/>
+  <circle cx="11.8" cy="3" r=".8" fill="#d4d4d4"/>
+</svg>

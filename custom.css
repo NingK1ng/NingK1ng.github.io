@@ -1,0 +1,723 @@
+/* Advait Paliwal's local layer: the reference layout stays intact while missing media remain legible. */
+.placeholder-media,
+.placeholder-cover,
+.art-placeholder {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 8rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f7f7f7 0%, #ececec 100%);
+  color: #8a8a8a;
+  font-size: var(--text-sm);
+  letter-spacing: .01em;
+  text-align: center;
+}
+.placeholder-media::before,
+.placeholder-cover::before,
+.art-placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border: 1px solid #d6d6d6;
+  transform: rotate(-7deg);
+}
+.placeholder-media span,
+.placeholder-cover span,
+.art-placeholder span {
+  position: relative;
+  z-index: 1;
+  padding: .35rem .5rem;
+  background: #f4f4f4cc;
+}
+.section-media .placeholder-media {
+  aspect-ratio: 16 / 10;
+  min-height: 0;
+}
+.reading-cover .placeholder-cover {
+  aspect-ratio: 2 / 3;
+  min-height: 0;
+  font-size: var(--text-xs);
+}
+.art-image-link .art-placeholder {
+  aspect-ratio: 4 / 3;
+  min-height: 0;
+}
+.article-cover.placeholder-cover {
+  height: auto;
+  aspect-ratio: 16 / 10;
+  margin-bottom: 3rem;
+}
+.article-body .article-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10rem;
+  margin: 1.75rem 0;
+  background: #f5f5f5;
+  color: #777;
+  font-size: var(--text-sm);
+}
+.article-body .article-placeholder span {
+  padding: .4rem .6rem;
+  border: 1px solid #ddd;
+}
+.article-embed.article-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  color: #777;
+  font-size: var(--text-sm);
+}
+.article-inline-placeholder {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 12rem;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #f5f5f5;
+  color: #777;
+  font-size: var(--text-sm);
+  text-align: center;
+}
+.article-inline-placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border: 1px solid #ddd;
+  transform: rotate(-4deg);
+}
+.article-inline-placeholder span {
+  position: relative;
+  z-index: 1;
+  padding: .4rem .6rem;
+  background: #f8f8f8;
+}
+.article-body > .article-inline-placeholder + * {
+  margin-top: 1.5rem;
+}
+@media (max-width: 767px) {
+  .placeholder-media,
+  .placeholder-cover,
+  .art-placeholder {
+    min-height: 7rem;
+  }
+  .article-cover.placeholder-cover {
+    margin-bottom: 2rem;
+  }
+  .article-inline-placeholder {
+    min-height: 8rem;
+  }
+}
+
+/* Small, text-first category switches for the Writing, Reading, and Listening modules. */
+.module-tabs {
+  width: min(calc(var(--content-width) + 3rem), 100%);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.module-tab {
+  position: relative;
+  border: 0;
+  padding: 0 0 .2rem;
+  background: transparent;
+  color: #0000008c;
+  font: inherit;
+  font-size: var(--text-base);
+  line-height: 1.45;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+.module-tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .2s ease;
+}
+.module-tab:hover,
+.module-tab:focus-visible,
+.module-tab.is-active {
+  color: #000;
+}
+.module-tab:hover::after,
+.module-tab:focus-visible::after,
+.module-tab.is-active::after {
+  transform: scaleX(1);
+}
+.module-tab:focus-visible {
+  outline: none;
+}
+.module-panel[hidden] {
+  display: none;
+}
+.module-empty-panel {
+  min-height: 10rem;
+  padding: .75rem 0 4rem;
+}
+.module-empty-panel .container {
+  color: var(--color-text-muted);
+}
+.reading-item[data-tab-panel] {
+  padding-top: 0;
+}
+.reading-collection > .reading-item[data-tab-panel="reading-fiction"]:not(:has(~ .reading-item[data-tab-panel="reading-fiction"])),
+.reading-collection > .reading-item[data-tab-panel="reading-academic"]:not(:has(~ .reading-item[data-tab-panel="reading-academic"])) {
+  padding-bottom: 4rem;
+}
+.art-list[data-tab-panel] {
+  padding-top: 0;
+}
+.work-panel[data-tab-panel] > .section-item:first-child {
+  padding-top: 0;
+}
+.work-panel[data-tab-panel] > .section-item:last-child {
+  padding-bottom: 4rem;
+}
+
+/* Keep the hover underline intact when a title wraps across multiple lines. */
+.section-title-link,
+.section-title-link:hover,
+.section-title-link:focus-visible {
+  display: inline;
+  width: auto;
+}
+.section-title-link::after,
+.section-title-link:hover::after,
+.section-title-link:focus-visible::after {
+  content: none !important;
+  display: none !important;
+}
+.section-title-link:hover,
+.section-title-link:focus-visible {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-skip-ink: auto;
+  text-underline-offset: .2em;
+}
+.section-title-link:focus-visible {
+  outline: none;
+}
+
+/* Work article cards use the same image-left, text-right rhythm as the reference. */
+.work-panel[data-tab-panel="work-articles"] .section-content {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 1.25rem;
+  align-items: center;
+}
+.work-panel[data-tab-panel="work-articles"] .section-text,
+.work-panel[data-tab-panel="work-articles"] .section-media {
+  min-width: 0;
+}
+.work-panel[data-tab-panel="work-articles"] .section-media img {
+  object-position: top;
+  cursor: pointer;
+}
+.work-panel[data-tab-panel="work-articles"] .section-meta {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+.work-panel[data-tab-panel="work-skills"] .section-content {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+.work-panel[data-tab-panel="work-skills"] .section-text,
+.work-panel[data-tab-panel="work-skills"] .section-media {
+  min-width: 0;
+}
+.work-panel[data-tab-panel="work-skills"] .section-media img {
+  object-position: top;
+  cursor: pointer;
+}
+.pursuing-goal {
+  color: #0b4f8a !important;
+  font-weight: 600 !important;
+}
+.section-item hr.pursuing-separator {
+  display: block;
+  width: 100%;
+  height: 0;
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+.contact-block {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.contact-block h2 {
+  font-size: var(--text-base);
+  font-weight: 500;
+  line-height: 1.45;
+}
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+.contact-details p {
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+.contact-label {
+  color: var(--color-text);
+}
+@media (max-width: 767px) {
+  .work-panel[data-tab-panel="work-articles"] .section-content,
+  .work-panel[data-tab-panel="work-skills"] .section-content {
+    grid-template-columns: 1fr;
+    gap: .75rem;
+  }
+}
+@media (min-width: 768px) {
+  .module-tabs {
+    width: min(calc(var(--content-width) + 4rem), 100%);
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .module-tabs {
+    width: min(calc(var(--content-width) + 5rem), 100%);
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-top: var(--header-height);
+  }
+}
+@media (max-width: 767px) {
+  .module-tabs {
+    width: 100%;
+    padding: 1.25rem 1.5rem 1.25rem;
+  }
+}
+@media (max-width: 360px) {
+  .module-tabs {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Listening reuses the Work page's image-left, text-right rhythm. */
+.listening-list {
+  padding: 0;
+}
+.listening-list > .section-item:first-child {
+  padding-top: 0;
+}
+.listening-list > .section-item:last-child {
+  padding-bottom: 4rem;
+}
+.section-genre {
+  color: #6b7280;
+  font-size: var(--text-sm) !important;
+  line-height: 1.45;
+}
+.section-artist {
+  color: var(--color-text-muted) !important;
+  font-size: var(--text-sm) !important;
+  line-height: 1.45;
+}
+.section-album {
+  color: var(--color-text-muted) !important;
+  font-size: var(--text-sm) !important;
+  line-height: 1.45;
+}
+
+/* Keep every album cover in the Albums panel on the same square crop. */
+#listening-albums .section-media {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+#listening-albums .section-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#listening-albums .section-media .placeholder-media {
+  aspect-ratio: 1 / 1;
+}
+@media (min-width: 768px) {
+  .listening-list > .section-item:last-child {
+    padding-bottom: 5rem;
+  }
+}
+
+/* Poetry keeps the archive rhythm while giving the detail page a bilingual reading surface. */
+.poetry-list {
+  padding: 0;
+}
+.poetry-list > .section-item:first-child {
+  padding-top: 0;
+}
+.poetry-list > .section-item:last-child {
+  padding-bottom: 4rem;
+}
+.poetry-item .section-content {
+  align-items: start;
+}
+.poetry-item .section-media {
+  align-self: start;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.poetry-item .section-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.poetry-item .section-text {
+  gap: .35rem;
+}
+.poetry-date {
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  line-height: 1.45;
+}
+.poetry-detail-cover {
+  position: relative;
+  margin: 3rem 0 0;
+  aspect-ratio: 4 / 3;
+  overflow: visible;
+}
+.poetry-detail-cover img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.poetry-detail-gallery {
+  display: grid;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.poetry-detail-gallery figure {
+  position: relative;
+  margin: 0;
+  height: auto;
+  aspect-ratio: auto;
+  overflow: visible;
+}
+.poetry-detail-gallery img {
+  display: block;
+  width: auto !important;
+  max-width: 100%;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+  border-radius: 4px;
+}
+.poetry-image-meta {
+  position: static;
+  margin-top: .5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .1rem;
+  color: #000;
+  font-size: var(--text-xs);
+  line-height: 1.3;
+  text-align: right;
+  text-shadow: none;
+  pointer-events: none;
+}
+.poetry-detail-cover .poetry-image-meta {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: .5rem;
+}
+.poetry-bilingual {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+}
+.poetry-language {
+  min-width: 0;
+  color: #1a1a1a;
+  font-size: var(--text-md);
+  line-height: 1.7;
+}
+.poetry-language--zh {
+  border-left: 1px solid var(--color-border);
+  padding-left: 2rem;
+}
+.poetry-stanza {
+  margin: 0 0 1.75rem;
+}
+.poetry-stanza:last-child {
+  margin-bottom: 0;
+}
+.poetry-line {
+  display: block;
+}
+.poetry-line--indent {
+  padding-left: 0;
+}
+.essay-intro {
+  padding-top: .75rem;
+  padding-bottom: 2rem;
+  color: var(--color-text-muted);
+}
+.essay-intro p {
+  margin: 0;
+}
+.language-switch {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 1.25rem 0 1rem;
+}
+.language-switch-button {
+  position: relative;
+  border: 0;
+  padding: 0 0 .2rem;
+  background: transparent;
+  color: #0000008c;
+  font: inherit;
+  font-size: var(--text-base);
+  line-height: 1.45;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+.language-switch-button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .2s ease;
+}
+.language-switch-button:hover,
+.language-switch-button:focus-visible,
+.language-switch-button.is-active {
+  color: #000;
+}
+.language-switch-button:hover::after,
+.language-switch-button:focus-visible::after,
+.language-switch-button.is-active::after {
+  transform: scaleX(1);
+}
+.language-switch-button:focus-visible {
+  outline: none;
+}
+.essay-bilingual {
+  display: block;
+}
+.essay-language {
+  min-width: 0;
+}
+.essay-language > h2:first-child {
+  margin-top: 0;
+}
+.essay-language--zh {
+  border-left: 0;
+  padding-left: 0;
+}
+@media (min-width: 768px) {
+  .poetry-list > .section-item:last-child {
+    padding-bottom: 5rem;
+  }
+}
+@media (max-width: 767px) {
+  .poetry-bilingual {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .poetry-language--zh {
+    border-top: 1px solid var(--color-border);
+    border-left: 0;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    padding-left: 0;
+  }
+  .poetry-detail-cover {
+    margin-top: 2.5rem;
+  }
+  .poetry-detail-gallery {
+    margin-top: 2.5rem;
+    gap: 1.5rem;
+  }
+}
+
+/* Fiction uses the Poetry page's paired-language treatment without changing the academic archive. */
+html.js main[data-tab-group="reading"] .reading-collection > .reading-item[data-tab-panel="reading-fiction"]:not(.reading-fiction-bilingual) {
+  display: none;
+}
+.reading-fiction-note {
+  padding: 0 0 .75rem;
+}
+.reading-fiction-note p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  line-height: 1.45;
+}
+.reading-fiction-bilingual .reading-content {
+  align-items: start;
+}
+.reading-fiction-bilingual .reading-cover {
+  max-width: 6.5rem;
+}
+.reading-fiction-bilingual .reading-text.reading-bilingual {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 1.5rem;
+}
+.reading-fiction-bilingual .reading-fiction-tag {
+  margin-bottom: .1rem;
+}
+.reading-fiction-bilingual .reading-language {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+}
+.reading-fiction-bilingual .reading-language--zh {
+  border-left: 1px solid var(--color-border);
+  padding-left: 1.5rem;
+}
+.reading-fiction-bilingual .reading-language h2 {
+  min-width: 0;
+}
+@media (max-width: 767px) {
+  .reading-fiction-bilingual .reading-cover {
+    max-width: 5.25rem;
+  }
+  .reading-fiction-bilingual .reading-text.reading-bilingual {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .reading-fiction-bilingual .reading-language--zh {
+    border-left: 0;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+    padding-left: 0;
+  }
+}
+
+/* Text-only transcription for the long-form Chinese essay. */
+.essay-source-article .article-body {
+  font-family: inherit;
+}
+.essay-source-article .article-body h2,
+.essay-source-article .article-body h3 {
+  color: #9b9b9b;
+  font-weight: 500;
+  text-align: center;
+}
+.essay-source-article .article-body strong {
+  color: #0b4f8a;
+  font-weight: 600;
+}
+.essay-source-article .article-body h2:first-child {
+  margin-top: 0;
+}
+.essay-source-article .article-body p,
+.essay-source-article .article-body ol,
+.essay-source-article .article-body ul,
+.essay-source-article .article-body blockquote {
+  letter-spacing: .01em;
+}
+.essay-source-article .essay-inline-accent,
+.essay-source-article .essay-accent-text,
+.essay-source-article .essay-accent-paragraph {
+  color: #0b4f8a;
+  font-weight: 600;
+}
+.essay-source-article .essay-source-annotation,
+.essay-source-article .essay-commentary,
+.essay-source-article .essay-accent-quote {
+  font-style: normal;
+  color: #1a1a1a;
+}
+.essay-source-article .essay-source-annotation p,
+.essay-source-article .essay-commentary p,
+.essay-source-article .essay-accent-quote p {
+  color: inherit;
+}
+.essay-source-article .essay-source-annotation p + p,
+.essay-source-article .essay-commentary p + p,
+.essay-source-article .essay-accent-quote p + p {
+  margin-top: 1.1rem;
+}
+.essay-source-article .essay-accent-quote {
+  color: #0b4f8a;
+  font-weight: 600;
+}
+.essay-source-article .essay-numbered-item {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  gap: .25rem;
+}
+.essay-source-article .essay-numbered-item > span:first-child {
+  font-variant-numeric: tabular-nums;
+}
+.essay-source-article .essay-ellipsis {
+  color: var(--color-text-muted);
+  letter-spacing: .16em;
+}
+.essay-source-article .essay-lead-quote {
+  margin: 0 0 2.5rem;
+  border-left: 2px solid var(--color-border);
+  padding-left: 1.25rem;
+  color: #0b4f8a;
+  font-size: var(--text-md);
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+/* About follows the essay layout: one language is visible at a time. */
+.about-article > header {
+  margin-bottom: 0;
+}
+.about-article > header .language-switch {
+  margin-bottom: 2.5rem;
+}
+.about-language {
+  min-width: 0;
+  color: #1a1a1a;
+  font-size: var(--text-md);
+  line-height: 1.7;
+}
+.about-language--zh {
+  border-left: 0;
+  padding-left: 0;
+}
+.about-language a {
+  overflow-wrap: anywhere;
+}
+.about-language > .about-separator {
+  width: 100%;
+  height: 0;
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
