@@ -1,4 +1,4 @@
-/* Jinning Zhang's local layer: the reference layout stays intact while missing media remain legible. */
+/* Advait Paliwal's local layer: the reference layout stays intact while missing media remain legible. */
 .placeholder-media,
 .placeholder-cover,
 .art-placeholder {
@@ -212,6 +212,10 @@
 }
 .section-title-link:focus-visible {
   outline: none;
+}
+
+.section-title-link--disabled {
+  cursor: default;
 }
 
 /* Work article cards use the same image-left, text-right rhythm as the reference. */
